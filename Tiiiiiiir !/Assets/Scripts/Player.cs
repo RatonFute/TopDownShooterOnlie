@@ -10,6 +10,21 @@ public class Player : NetworkBehaviour
     {
         if (!authority) { }
         if (!Input.GetKeyDown(KeyCode.A)) return;
+        //transform.Translate(_movement);
+        CmdMove();
+    }
+
+    [Command]
+    private void CmdMove()
+    {
+
+        RpcMove();
+    }
+
+    [ClientRpc]
+    private void RpcMove()
+    {
         transform.Translate(_movement);
     }
+
 }
