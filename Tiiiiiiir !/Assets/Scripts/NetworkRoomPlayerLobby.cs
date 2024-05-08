@@ -17,8 +17,6 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
     public bool IsReady = false;
 
     private bool isLeader;
-
-
     public bool IsLeader
     {
         set
