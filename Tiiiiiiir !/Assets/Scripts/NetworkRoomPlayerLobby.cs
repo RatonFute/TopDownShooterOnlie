@@ -65,11 +65,11 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
 
     private void UpdateDisplay()
     {
-        if(!authority)
+        if(!isOwned)
         {
             foreach(var player in Room.RoomPLayers)
             {
-                if(player.authority)
+                if(player.isOwned)
                 {
                     player.UpdateDisplay();
                     break;
@@ -117,7 +117,7 @@ public class NetworkRoomPlayerLobby : NetworkBehaviour
     {
         if (Room.RoomPLayers[0].connectionToClient != connectionToClient) { return; }
 
-        //start game
+        Room.StartGame();
 
     }
 

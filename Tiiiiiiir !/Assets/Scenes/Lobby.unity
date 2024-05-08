@@ -67,9 +67,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -995,6 +992,7 @@ MonoBehaviour:
   _minPlayers: 2
   _menuScene: Assets/Scenes/Lobby.unity
   _roomPlayerPrefab: {fileID: 5438528313038338444, guid: 302bedb2fa868ec4fa30298e53bf0a6f, type: 3}
+  _gamePlayerPrefab: {fileID: 4622417029893866957, guid: 722a48ac3fdfbc849962cb26422ebd03, type: 3}
 --- !u!114 &764618802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2315,37 +2313,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342193802}
   m_CullTransparentMesh: 1
---- !u!1 &1354283449
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1354283450}
-  m_Layer: 0
-  m_Name: NetworkRoomPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1354283450
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354283449}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 859.34875, y: 570.8694, z: -6.1922603}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1430937572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,7 +2671,7 @@ GameObject:
   - component: {fileID: 1554890148}
   - component: {fileID: 1554890147}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas Lobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3268,4 +3235,3 @@ SceneRoots:
   - {fileID: 1498850513}
   - {fileID: 1794169958}
   - {fileID: 1231303469}
-  - {fileID: 1354283450}

@@ -14,10 +14,14 @@ public class NetworkManagerLobby : NetworkManager
 
     [SerializeField] private NetworkRoomPlayerLobby _roomPlayerPrefab = null;
 
+    [SerializeField] private NetworkGamePlayerLobby _gamePlayerPrefab = null;
+
     public static event Action OnClientConnected;
     public static event Action OnClientDisconnected;
+    public static event Action<NetworkConnection> OnServerReadied;
 
     public List<NetworkRoomPlayerLobby> RoomPLayers { get; } = new List<NetworkRoomPlayerLobby>();
+    public List<NetworkGamePlayerLobby> GamePLayers { get; } = new List<NetworkGamePlayerLobby>();
 
     public override void OnStartServer()
     {
@@ -33,7 +37,6 @@ public class NetworkManagerLobby : NetworkManager
             NetworkClient.RegisterPrefab(prefab);
         }
     }
-
 
     public override void OnClientConnect()
     {
@@ -116,4 +119,42 @@ public class NetworkManagerLobby : NetworkManager
     }
 
 
+    public void StartGame()
+    {
+        if (SceneManager.GetActiveScene().path == _menuScene)
+        {
+            if (!IsReadyToStart()) { return; }
+            ServerChangeScene("Game");
+        }
+    }
+    //<>
+
+
+    public override void ServerChangeScene(string newSceneName)
+    {
+        if (SceneManager.GetActiveScene().path == _menuScene && newSceneName.StartsWith("Game"))
+        {
+            for (int i = RoomPLayers.Count - 1; i >= 0; i--)
+            {
+                var conn = RoomPLayers[i].connectionToClient;
+                var gamePlayerInstance = Instantiate(_gamePlayerPrefab);
+                gamePlayerInstance.SetDisplayName(RoomPLayers[i].name);
+
+                NetworkServer.Destroy(conn.identity.gameObject);
+                NetworkServer.ReplacePlayerForConnection(conn, gamePlayerInstance.gameObject);
+            }
+        }
+
+        base.ServerChangeScene(newSceneName);
+    }
+    public override void OnServerReady(NetworkConnectionToClient conn)
+    {
+        base.OnServerReady(conn);
+
+        OnServerReadied?.Invoke(conn);
+    }
+
 }
+
+
+
